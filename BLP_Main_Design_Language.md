@@ -1,6 +1,6 @@
 # BLP Main Design Language
 
-> **Philosophy**: Bold, Liminal, Punctual.  
+> **Philosophy**: 난해함, 유동성, 몽환적  
 > 각진 모서리와 미세한 투명도, 그리고 하프톤의 몽환적 리듬이 공존하는 디자인 언어.
 
 ---
