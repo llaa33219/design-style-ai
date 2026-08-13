@@ -20,28 +20,13 @@ hard-code values — read from CSS custom properties.
 
 ---
 
-## 1. File Layout
-
-```
-blp-journal-style/
-├── tokens.css      ← all custom properties (color, type, space, motion)
-├── style.css       ← components read from tokens
-├── index.html      ← reference page
-└── script.js       ← theme toggle (localStorage) + today stamp
-```
-
-`tokens.css` is loaded first, then `style.css`. Components must read from
-tokens; components must not hard-code values.
-
----
-
-## 2. Design Tokens
+## 1. Design Tokens
 
 All tokens are CSS custom properties declared on `:root`. The dark theme
 is declared on `:root[data-theme="dark"]`. There is no class-based theme;
 the `data-theme` attribute on `<html>` is the only switch.
 
-### 2.1 Color
+### 1.1 Color
 
 #### Light (default)
 
@@ -82,7 +67,7 @@ the `data-theme` attribute on `<html>` is the only switch.
 
 The state tones (`--ok`, `--warn`, `--err`) are identical in both themes.
 
-### 2.2 Spacing (4px base)
+### 1.2 Spacing (4px base)
 
 ```
 --s-1:   4px
@@ -99,7 +84,7 @@ The state tones (`--ok`, `--warn`, `--err`) are identical in both themes.
 
 Use these exclusively. Never write raw `px` for spacing.
 
-### 2.3 Type Scale (1.25 ratio, 17px base)
+### 1.3 Type Scale (1.25 ratio, 17px base)
 
 ```
 --fs-0: 12px   caption / meta
@@ -117,7 +102,7 @@ Use these exclusively. Never write raw `px` for spacing.
 --lh-body:  1.75   body
 ```
 
-### 2.4 Borders & Radius
+### 1.4 Borders & Radius
 
 ```
 --bw:        2px     all rules
@@ -125,7 +110,7 @@ Use these exclusively. Never write raw `px` for spacing.
 --radius:    0       always
 ```
 
-### 2.5 Motion
+### 1.5 Motion
 
 ```
 --t-fast: 150ms     hover, focus, theme switch
@@ -135,7 +120,7 @@ Use these exclusively. Never write raw `px` for spacing.
 
 There is no `slow` transition. Do not introduce one.
 
-### 2.6 Container
+### 1.6 Container
 
 ```
 --container: 1200px
@@ -144,9 +129,9 @@ There is no `slow` transition. Do not introduce one.
 
 ---
 
-## 3. Typography
+## 2. Typography
 
-### 3.1 Fonts
+### 2.1 Fonts
 
 ```css
 @font-face {
@@ -169,7 +154,7 @@ There is no `slow` transition. Do not introduce one.
 }
 ```
 
-### 3.2 Stack
+### 2.2 Stack
 
 - **Body & headings:** `'BookkMyungjo', 'Source Serif Pro', 'Noto Serif KR', Georgia, serif`
 - **Code & data:** `'CloudSansCode', ui-monospace, monospace`
@@ -178,7 +163,7 @@ The same family (BookkMyungjo) is used for both body and headings; the
 contrast comes from `font-weight: 700` and size, not from switching
 families. The only exception is code.
 
-### 3.3 Application
+### 2.3 Application
 
 - Body: 17px / 1.75.
 - Headings: tighter leading (1.25); size follows the scale.
@@ -187,9 +172,9 @@ families. The only exception is code.
 
 ---
 
-## 4. Geometry
+## 3. Geometry
 
-### 4.1 The Page
+### 3.1 The Page
 
 Three horizontal bands stacked vertically, all on the paper-blue desk (`--bg`):
 
@@ -217,7 +202,7 @@ Three horizontal bands stacked vertically, all on the paper-blue desk (`--bg`):
   `.site-footer .container { border-left: 0; border-right: 0; }` to enforce this.
 - The four-column footer grid is `1.4fr 1fr 1fr 1fr`.
 
-### 4.2 The Emphasis Bar
+### 3.2 The Emphasis Bar
 
 The 4px `--bw-thick` bar is the system's only decoration. It is reserved
 for:
@@ -226,7 +211,7 @@ for:
 - the active section indicator on `primary-nav`
 - nothing else
 
-### 4.3 Mobile
+### 3.3 Mobile
 
 Below 880px:
 
@@ -243,14 +228,14 @@ Below 880px:
 
 ---
 
-## 5. Components
+## 4. Components
 
-### 5.1 Meta Bar (top strip)
+### 4.1 Meta Bar (top strip)
 
 Vol. / No. / ISSN / today stamp. `var(--fs-0)`, `var(--ink-soft)`. The
 `<b>` label `BLP JOURNAL` is `var(--ink)`. Bottom hairline only.
 
-### 5.2 Site Header (left logo / center nav / right buttons)
+### 4.2 Site Header (left logo / center nav / right buttons)
 
 - **Brand (left):** a 32×32 mark on `--accent` showing the letter `B` in
   `BookkMyungjo 700`, then the wordmark `BLP JOURNAL` in `700` with
@@ -262,7 +247,7 @@ Vol. / No. / ISSN / today stamp. `var(--fs-0)`, `var(--ink-soft)`. The
   `Subscribe` call to action (`btn--solid btn--sm`).
 - Sticky at top with `position: sticky`.
 
-### 5.3 Buttons
+### 4.3 Buttons
 
 Two variants; never invent a third.
 
@@ -280,7 +265,7 @@ Focus: `outline: var(--bw) solid var(--accent); outline-offset: 2px`.
 
 Disabled: `opacity: 0.4; cursor: not-allowed`.
 
-### 5.4 Masthead (article title block)
+### 4.4 Masthead (article title block)
 
 - `masthead__kicker` (uppercase, `--fs-0`, `--ink-soft`, letter-spacing 0.12em).
 - `.paper-title` (`--fs-6`, 700, line-height tight).
@@ -289,26 +274,26 @@ Disabled: `opacity: 0.4; cursor: not-allowed`.
 - `.paper-meta dl` — three columns of `dt` / `dd`. `dt` is uppercase
   `--ink-soft` with letter-spacing; `dd` is `--ink` in `CloudSansCode`.
 
-### 5.5 Abstract
+### 4.5 Abstract
 
 `var(--surface)` background, 2px `--line` border, **4px `--accent` left
 bar**. Heading `Abstract` is uppercase `--accent` 700. Body uses
 `<b>` and `<i>` for emphasis; `<code class="inline">` for token names;
 `.ink-accent` (color `--accent`, weight 700) for inline accent phrases.
 
-### 5.6 Headings
+### 4.6 Headings
 
 - `h2.paper-h2` — `--fs-5`, 700, tight leading, `border-bottom: var(--bw)
   solid var(--line)`, generous top margin (`--s-9`).
 - `h3.paper-h3` — `--fs-4`, 700, tight leading, no border, top margin `--s-7`.
 - `h4` (rare) — `--fs-3`, 700.
 
-### 5.7 Quote
+### 4.7 Quote
 
 `border-left: var(--bw-thick) solid var(--accent)`, no background. Quote
 text in `--fs-3` italic. Cite in `--fs-0` `--ink-soft`.
 
-### 5.8 Table
+### 4.8 Table
 
 `border: var(--bw) solid var(--line)`, no zebra. `<thead> <th>` are
 inverted: `background: var(--ink)`, color `var(--bg)`, uppercase,
@@ -316,41 +301,41 @@ inverted: `background: var(--ink)`, color `var(--bg)`, uppercase,
 top. Inline `<code class="inline">` is the standard for token/value
 cells.
 
-### 5.9 Code block
+### 4.9 Code block
 
 `pre.codeblock`. No box. Just `border-top` and `border-bottom` 2px.
 `--fs-1`, leading 1.6, `CloudSansCode`. `overflow-x: auto`.
 
-### 5.10 Inline code
+### 4.10 Inline code
 
 `code.inline` — `0.88em` on `--surface-alt` with 1px `--line` chip. Use
 for token names, file paths, command snippets, and small data references.
 
-### 5.11 Figure / swatch
+### 4.11 Figure / swatch
 
 `figure` holds a `figure__swatches` grid. Each `swatch` is a flex row:
 40×40 chip + name + `<code>` hex. Grid is 4 cols on desktop, 2 cols on
 mobile. `border-right` separates cells; the rightmost in each row has
 `border-right: 0`.
 
-### 5.12 Form
+### 4.12 Form
 
 `.field` is a labeled block. `.field__label` is uppercase `--ink-soft`
 `--fs-0`. `.field__input` is full-width, `var(--bg)` background, 2px
 `--line` border, focus → `var(--accent)` border.
 
-### 5.13 Badges
+### 4.13 Badges
 
 Three states: `--ok`, `--warn`, `--err`. The badge *fills* the soft tone
 and uses the corresponding `--*-ink` text. Uppercase, `--fs-0`, 2px
 border matching fill.
 
-### 5.14 Callout
+### 4.14 Callout
 
 `background: var(--surface-alt)`, 2px `--line` border, **4px `--accent`
 left bar**. Body in `--fs-1`. Use sparingly — one per section.
 
-### 5.15 Footer
+### 4.15 Footer
 
 - 4 columns (1.4fr 1fr 1fr 1fr).
 - All text is `var(--ink)` — color does not carry hierarchy. Hierarchy
@@ -358,11 +343,11 @@ left bar**. Body in `--fs-1`. Use sparingly — one per section.
   (section heads), and the absence of decoration.
 - Links: `border-bottom: 0`, hover → `var(--accent)`.
 - `.site-footer__copy` is separated from the columns by a top hairline.
-- The footer `.container` does not have a left/right hairline (see §4.1).
+- The footer `.container` does not have a left/right hairline (see §3.1).
 
 ---
 
-## 6. Theming
+## 5. Theming
 
 - Default is `light`. Set `data-theme="light"` on `<html>` explicitly.
 - Toggle JS flips between `light` and `dark` and persists to
@@ -373,7 +358,7 @@ left bar**. Body in `--fs-1`. Use sparingly — one per section.
 
 ---
 
-## 7. Reference HTML Skeleton
+## 6. Reference HTML Skeleton
 
 ```html
 <!DOCTYPE html>
@@ -416,7 +401,7 @@ left bar**. Body in `--fs-1`. Use sparingly — one per section.
 
 ---
 
-## 8. Do / Don't
+## 7. Do / Don't
 
 | Do                                                 | Don't                                       |
 |----------------------------------------------------|---------------------------------------------|
@@ -433,7 +418,7 @@ left bar**. Body in `--fs-1`. Use sparingly — one per section.
 
 ---
 
-## 9. Acceptance Checklist
+## 8. Acceptance Checklist
 
 Before shipping a page in BLP Journal Style, verify:
 
