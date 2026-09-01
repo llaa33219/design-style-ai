@@ -146,7 +146,7 @@
 
 | 속성 | 값 |
 | --- | --- |
-| **태두리 두께** | `4px` (요소 타일도 동일하게 4px) |
+| **태두리 두께** | `2px` (요소 타일도 동일하게 2px) |
 | **태두리 색** | 비호버 = `inactive` / 호버 = `--color-main` |
 | **배경** | `--tile-bg` (`#FAFCFF`) |
 | **모서리** | **항상 완전 각 (`border-radius: 0`). 둥글 옵션 없음.** |
@@ -177,7 +177,7 @@
 
 | 속성 | 값 |
 | --- | --- |
-| **태두리 두께** | `2px` (요소는 타일보다 얇음) |
+| **태두리 두께** | `1px` (요소는 타일보다 얇음) |
 | **기본 색** | `inactive` |
 | **호버 색** | `active` |
 | **포커스 색** | `active` + 추가로 `--focus-ring` (`#0026A3`) 1px inner outline 또는 색 강조 |
@@ -542,6 +542,8 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
 
 > 그림자 색은 기본 `inactive`, 호버 `main`, 엑티브 `active`로 *상태에 맞춰* 어두워진다.
 > 또는 `--tile-bg`(같은 색)로 둘 수도 — 단 색 일관성 유지.
+>
+> **보더 두께와의 관계:** 보더가 2px로 얇아진 만큼, 그림자 변위(6/2/0)는 그대로 두는 게 *떠있음 메타포*가 더 또렷해진다. 더 얇은 그림자(예: 3/1/0)를 원하면 별도 시스템.
 
 ---
 
@@ -568,8 +570,8 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
 | **UI 크롬에 흐릿한 그림자** (blur 있는 box-shadow) | 미니멀 위반. 각진(샤프) 그림자만 허용. *콘텐츠의 그림자는 OK* (예: 영상 속 그림자). |
 | **부분 둥근 모서리** (예: `border-radius: 8px`) | 미니멀 위반. 완전 둥글 또는 완전 각. |
 | **타일을 둥글게** (배경 타일이든 요소 타일이든) | 타일은 항상 완전 각 (1.3). 둥글 옵션은 작은 요소에만. |
-| **중간 굵기 보더** (1px, 3px 등) | 타일 4px, 요소 2px. 그 외 금지. |
-| **타일 안 요소의 보더가 타일 보더보다 두꺼움** | 항상 얇아야 함 (4 > 2). |
+| **중간 굵기 보더** (예: 3px) | 타일 2px, 요소 1px. 그 외 금지. |
+| **타일 안 요소의 보더가 타일 보더보다 두꺼움** | 항상 얇아야 함 (2 > 1). |
 | **호버/액티브/클릭 시 색반전** (BLP BLUE ↔ BLP WHITE swap) | 색은 *더 어둡거나 더 밝거나* 단방향만. swap 금지 (3.4). |
 | **호버/액티브 색을 다른 곳 기본값으로 재사용** | 한 색 = 한 의미 (3.4). |
 | **비어있는 요소의 액티브/포커스에서 내부 변화 누락** | 태두리만 바꾸고 끝내지 말 것. 배경이 paper/light-dark 톤으로 *한 단계* 이동 필수 (3.4). |
@@ -585,10 +587,10 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
 
 ```css
 .tile--sharp-shadow {
-  box-shadow: 4px 4px 0 var(--color-inactive);
+  box-shadow: 2px 2px 0 var(--color-inactive);
 }
 .tile--sharp-shadow:hover {
-  box-shadow: 4px 4px 0 var(--color-main);
+  box-shadow: 2px 2px 0 var(--color-main);
 }
 ```
 
@@ -614,7 +616,7 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
   font: 500 14px/1 'Pretendard';
   color: var(--text);
   background: var(--tile-bg);          /* 비어있음 — tile-bg 와 동일 */
-  border: 2px solid var(--color-inactive);
+  border: 1px solid var(--color-inactive);
   border-radius: 20px;
   cursor: pointer;
   transition: background 120ms ease-out, border-color 120ms ease-out;
@@ -669,7 +671,7 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
   font: 400 14px/1 'Pretendard';
   color: var(--text);
   background: var(--tile-bg);          /* 비어있음 */
-  border: 2px solid var(--color-inactive);
+  border: 1px solid var(--color-inactive);
   border-radius: 20px;
   outline: none;
   transition: background 120ms ease-out, border-color 120ms ease-out;
@@ -701,7 +703,7 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
 ```css
 .el-tile--card {
   background: var(--tile-bg);
-  border: 4px solid var(--color-inactive);
+  border: var(--border-tile) solid var(--color-inactive);
   border-radius: 0;
   padding: 16px;
   transition: border-color 120ms ease-out;
@@ -722,7 +724,7 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
   font: 500 12px/1 'Pretendard';
   color: var(--text-sub);
   background: var(--blp-paper-blue);     /* 채워짐 */
-  border: 2px solid var(--blp-light-blue);
+  border: 1px solid var(--blp-light-blue);
   border-radius: 12px;                  /* 24/2 = 완전 둥글 */
 }
 
@@ -747,7 +749,7 @@ BLP Minimal Tile에서 색은 *용도가 단일*하다.
   display: flex; align-items: center; gap: 12px;
   padding: 12px;
   background: var(--tile-bg);            /* 비어있음 */
-  border: 2px solid var(--color-inactive);
+  border: 1px solid var(--color-inactive);
   transition: background 120ms ease-out, border-color 120ms ease-out;
 }
 
@@ -932,7 +934,7 @@ gap: 4px
     /* 배경 타일 — 항상 완전 각. 호버는 즉시 전환. */
     .bg-tile {
       background: var(--tile-bg);
-      border: 4px solid var(--color-inactive);
+      border: var(--border-tile) solid var(--color-inactive);
       border-radius: 0;
       padding: 16px;
       overflow: auto;
@@ -944,7 +946,7 @@ gap: 4px
     /* 요소 타일 — 항상 완전 각. 호버는 즉시 전환. */
     .el-tile {
       background: var(--tile-bg);
-      border: 4px solid var(--color-inactive);
+      border: var(--border-tile) solid var(--color-inactive);
       border-radius: 0;
       transition: border-color var(--t-tile);
     }
@@ -953,7 +955,7 @@ gap: 4px
 
     /* 요소 — 둥글/각 선택 가능, 단 페이지 내 일관. 부드러운 전환. */
     .el {
-      border: 2px solid var(--color-inactive);
+      border: 1px solid var(--color-inactive);
       transition: background var(--t-base),
                   color var(--t-base),
                   border-color var(--t-base);
@@ -985,7 +987,7 @@ gap: 4px
 - [ ] *요소 타일*은 의미 단위로 적절히 묶였는가?
 - [ ] **모든 타일(배경/요소)의 모서리는 완전 각인가?**
 - [ ] 타일 안 *작은 요소*(버튼/인풋/칩)는 *완전 둥글 또는 완전 각* 중 일관되게?
-- [ ] 보더 두께는 타일 4px, 요소 2px인가?
+- [ ] 보더 두께는 타일 2px, 요소 1px인가?
 - [ ] 타일 호버 시 보더가 `--color-main`인가?
 - [ ] **요소가 채워져 있는가(별도 bg)?**
   - YES → 호버 보더는 더 어두운 톤 (`--el-hover` 또는 fill의 deep 버전)
@@ -1051,8 +1053,8 @@ gap: 4px
 
   /* 시스템 상수 */
   --gap-tile: 4px;
-  --border-tile: 4px;
-  --border-el:   2px;
+  --border-tile: 2px;   /* 타일 보더 두께 (요소보다 두꺼움) */
+  --border-el:   1px;   /* 요소 보더 두께 */
 
   /* 트랜지션 — 타일 즉시, 요소 부드럽게 */
   --t-tile: 0s;
